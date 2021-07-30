@@ -32,6 +32,12 @@ resource "google_container_cluster" "primary" {
   cluster_ipv4_cidr = var.cluster_ipv4_cidr
   network           = "projects/${local.network_project_id}/global/networks/${var.network}"
 
+  timeouts {
+      create = "10m"
+      update = "10m"
+      delete = "10m"
+    }
+
   dynamic "network_policy" {
     for_each = local.cluster_network_policy
 
